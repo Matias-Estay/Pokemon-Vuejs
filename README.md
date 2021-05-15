@@ -1,4 +1,5 @@
 # pokemon
+Pequeña app diseñada por Matías Estay en Vue.js. Utiliza librerías de bootstrap, axios, vueclipboard y jquery. Esto utiliza como back end la API https://pokeapi.co/
 
 ## Project setup
 ```
