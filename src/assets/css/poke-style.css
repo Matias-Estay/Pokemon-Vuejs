@@ -36,6 +36,7 @@
 }
 .poke-btn:hover{
     color:white;
+    background-color: #ee0505;
 }
 .f-screen{
     height: 100%;
@@ -66,4 +67,19 @@ main{
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 60px;
+}
+.modal{
+    z-index:100 !important;
+  }
+.modal-backdrop{
+z-index: -1 !important;
+}
+.modal-footer{
+display: none !important;
+}
+.modal-header{
+display: none !important;
+}
+.modal-body{
+padding:0  !important;
 }

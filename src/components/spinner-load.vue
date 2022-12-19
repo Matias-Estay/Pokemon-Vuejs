@@ -1,11 +1,11 @@
 <template>
-    <b-container class="f-screen bg-light loader" v-if="cargando==true" fluid>
-        <b-row :class="'justify-content-center align-items-center h-100 overflowed'">
-        <b-col class="col-xl-3 col-lg-8 col-md-8 col-sm-5 m-3" align-v="center">
-            <b-img class="rotating" src='/assets/poke-bola.png' fluid/>
-        </b-col>
-        </b-row>
-    </b-container>
+    <div class="cointainer-fluid f-screen bg-light loader w-100" v-if="cargando==true">
+        <div class='row justify-content-center align-items-center h-100 overflowed'>
+            <div class="col-xl-3 col-lg-8 col-md-8 col-sm-5 m-3 text-center">
+                <img class="rotating fluid" src="../assets/images/poke_bola.png"/>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 export default {
@@ -52,6 +52,7 @@ export default {
     }
 .rotating
     {
+    width: 80%;
     -webkit-animation: rotating 1s linear infinite;
     -moz-animation: rotating 1s linear infinite;
     -ms-animation: rotating 1s linear infinite;
