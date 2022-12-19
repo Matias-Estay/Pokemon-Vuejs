@@ -20,7 +20,8 @@ npm run build
 npm run lint
 ```
 
-on Web:
+### Web:
+
 https://miecvue3.netlify.app
 
 ### Customize configuration
