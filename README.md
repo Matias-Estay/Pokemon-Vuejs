@@ -20,5 +20,8 @@ npm run build
 npm run lint
 ```
 
+on Web:
+https://miecvue3.netlify.app
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
