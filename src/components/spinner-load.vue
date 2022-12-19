@@ -1,5 +1,5 @@
 <template>
-    <div class="cointainer-fluid f-screen bg-light loader w-100" v-if="cargando==true">
+    <div class="cointainer-fluid f-screen bg-light loader w-100" v-if="loading==true">
         <div class='row justify-content-center align-items-center h-100 overflowed'>
             <div class="col-xl-3 col-lg-8 col-md-8 col-sm-5 m-3 text-center">
                 <img class="rotating fluid" src="../assets/images/poke_bola.png"/>
@@ -10,7 +10,7 @@
 <script>
 export default {
     props:{
-        cargando:{
+        loading:{
             type:Boolean,
             default:false
         }

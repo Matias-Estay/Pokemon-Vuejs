@@ -2,7 +2,7 @@
   <layout-app :h_center="true">
     <template v-slot:default>
       <spinner-load :loading="loading"/>
-      <div class="container-fluid">
+      <div class="container-fluid" ref="search">
         <div class="row justify-content-center">
           <div class="input-group mb-3">
             <span class="input-group-prepend bg-white border-right-0">
@@ -13,6 +13,8 @@
             <input type="text" class="form-control border-left-0" v-model="search" :placeholder="'Search'"/>
           </div>
         </div>
+      </div>
+      <div class="container-fluid overflowed" :style="{'max-height':height+'px !important'}">
         <div class="row justify-content-center mt-3" v-if="filter_pokemons_all.length>0">
           <div class="row justify-content-center w-100 "  v-for="(item,index) in fav==false?filter_pokemons_all:filter_pokemons_fav" :key="index">
             <div class="bg-white shadow-sm mb-2 p-2 w-100">
@@ -109,7 +111,7 @@
           </div>
         </div>
       </div>
-      <footer class="footer">
+      <footer class="footer" ref="footer">
         <div class="container-fluid h-100">
           <div class="row justify-content-center align-items-center h-100">  
             <div class="col-xl-2 col-sm-6 col-6">
@@ -160,6 +162,7 @@ export default {
   },
   mounted(){
     this.loading=true;
+    this.height=window.innerHeight-this.$refs.footer.clientHeight-this.$refs.search.clientHeight-30;
     axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1118',{}).then((result)=>{
       for(var i =0;i<result.data.results.length;i++){
         result.data.results[i].name=result.data.results[i].name.charAt(0).toUpperCase() + result.data.results[i].name.slice(1)
@@ -167,11 +170,16 @@ export default {
       }
       this.loading=false;
     });
+    window.addEventListener('resize', ()=>{
+      this.height=window.innerHeight-this.$refs.footer.clientHeight-this.$refs.search.clientHeight-30;
+    });
+
   },
   data(){
     return{
       search:'',
       loading:false,
+      height:0,
       fav:false,
       pokemons:[],
       pokemon:[],
