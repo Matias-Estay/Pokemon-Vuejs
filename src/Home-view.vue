@@ -134,7 +134,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name:'home-view',
   computed:{
@@ -146,7 +146,7 @@ export default {
             .indexOf(this.search.toLowerCase()) > -1
         );
       });
-      return result;
+      return result
     },
     filter_pokemons_fav(){
       var result = this.pokemons.filter(item => {
@@ -158,18 +158,18 @@ export default {
         );
       });
       return result;
-    }
+    },
+    ...mapGetters('Pokestore',{
+      pokemons:'Getpokemons',
+      pokemon:'Getpokemon' 
+    })
   },
   mounted(){
     this.loading=true;
     this.height=window.innerHeight-this.$refs.footer.clientHeight-this.$refs.search.clientHeight-30;
-    axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=1118',{}).then((result)=>{
-      for(var i =0;i<result.data.results.length;i++){
-        result.data.results[i].name=result.data.results[i].name.charAt(0).toUpperCase() + result.data.results[i].name.slice(1)
-        this.pokemons.push({name:result.data.results[i].name,url:result.data.results[i].url,favorite:false});
-      }
+    this.ActionAll().then(()=>{
       this.loading=false;
-    });
+    })
     window.addEventListener('resize', ()=>{
       this.height=window.innerHeight-this.$refs.footer.clientHeight-this.$refs.search.clientHeight-30;
     });
@@ -181,12 +181,14 @@ export default {
       loading:false,
       height:0,
       fav:false,
-      pokemons:[],
-      pokemon:[],
       clipboard:'',
     }
   },
   methods:{
+    ...mapActions('Pokestore',{
+      ActionAll:'ActionAll',
+      ActionPokemon: 'ActionPokemon'
+    }),
     Copy_clipboard: function (name) {
       var copyText = document.getElementById("Clipboard-"+name);
       copyText.select();
@@ -198,11 +200,10 @@ export default {
     },
     Load_data: function(item){
       this.loading=true;
-      axios.get(item.url,{}).then((result)=>{
-        this.pokemon = result.data;
+      this.ActionPokemon(item).then(()=>{
         this.clipboard = String("Name: "+item.name+', Weight: '+this.pokemon.weight+", Height: "+this.pokemon.height+", Types: "+(this.pokemon.types!=undefined? this.pokemon.types[0].type.name + (this.pokemon.types[1]!=undefined?", "+this.pokemon.types[1].type.name:''):''));
         this.loading=false;
-      });
+      })
       this.$forceUpdate();
     },
     Cambio_fav: function(){
