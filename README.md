@@ -1,3 +1,5 @@
+Vue 3 y Vuex
+
 # vue3poke
 
 ## Project setup
